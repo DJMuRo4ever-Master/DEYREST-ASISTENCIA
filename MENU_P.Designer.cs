@@ -51,6 +51,7 @@
             // 
             // txt_Nombre
             // 
+            txt_Nombre.BackColor = Color.FromArgb(224, 224, 224);
             txt_Nombre.Enabled = false;
             txt_Nombre.Font = new Font("Consolas", 72F, FontStyle.Bold, GraphicsUnit.Point, 0);
             txt_Nombre.Location = new Point(12, 257);
@@ -64,6 +65,7 @@
             // 
             // txt_Codigo
             // 
+            txt_Codigo.BackColor = Color.White;
             txt_Codigo.Enabled = false;
             txt_Codigo.Font = new Font("Consolas", 36F, FontStyle.Bold, GraphicsUnit.Point, 0);
             txt_Codigo.Location = new Point(349, 158);
@@ -75,6 +77,7 @@
             // lbl_estado
             // 
             lbl_estado.AutoSize = true;
+            lbl_estado.BackColor = Color.FromArgb(224, 224, 224);
             lbl_estado.Font = new Font("Consolas", 36F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lbl_estado.Location = new Point(544, 508);
             lbl_estado.Name = "lbl_estado";
