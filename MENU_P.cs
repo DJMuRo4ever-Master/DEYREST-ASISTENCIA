@@ -34,7 +34,7 @@ namespace ATTEDEYV
             CentrarControl(txt_Codigo, this);
 
 
-            
+
         }
 
         PrivateFontCollection pfc = new PrivateFontCollection();
@@ -81,5 +81,33 @@ namespace ATTEDEYV
         {
 
         }
+
+        private void txt_Codigo_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                ValidarCodigo();
+                e.Handled = true;
+                e.SuppressKeyPress = true; // Evita el sonido del Enter
+            }
+
+        }
+        private void ValidarCodigo()
+        {
+            if (string.IsNullOrWhiteSpace(txt_Codigo.Text))
+            {
+                MessageBox.Show("Por favor, ingresa un código.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txt_Codigo.Text = "";
+                txt_Codigo.Focus();
+                lbl_estado.Text = "ACCESO FALLIDO";
+                lbl_estado.ForeColor = Color.Red;
+                CentrarControl(lbl_estado, this);
+                return;
+            }
+
+            // Aquí va tu lógica para procesar el código
+            //ProcesarCodigo(txt_Codigo.Text);
+        }
+
     }
 }

@@ -66,13 +66,13 @@
             // txt_Codigo
             // 
             txt_Codigo.BackColor = Color.White;
-            txt_Codigo.Enabled = false;
             txt_Codigo.Font = new Font("Consolas", 36F, FontStyle.Bold, GraphicsUnit.Point, 0);
             txt_Codigo.Location = new Point(349, 158);
             txt_Codigo.Name = "txt_Codigo";
             txt_Codigo.ReadOnly = true;
             txt_Codigo.Size = new Size(532, 64);
             txt_Codigo.TabIndex = 2;
+            txt_Codigo.KeyDown += txt_Codigo_KeyDown;
             // 
             // lbl_estado
             // 
