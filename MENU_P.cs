@@ -1,11 +1,14 @@
 using System.Drawing.Text;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using ATTEDEYV.Services;
 
 namespace ATTEDEYV
 {
     public partial class MENU_P : Form
     {
+        DatabaseService databaseService = new DatabaseService();
+
         public MENU_P()
         {
             InitializeComponent();
@@ -32,6 +35,8 @@ namespace ATTEDEYV
             CentrarControl(lbl_Reloj, this);
             CentrarControl(txt_Nombre, this);
             CentrarControl(txt_Codigo, this);
+
+            
 
 
 
@@ -99,15 +104,44 @@ namespace ATTEDEYV
                 MessageBox.Show("Por favor, ingresa un código.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txt_Codigo.Text = "";
                 txt_Codigo.Focus();
-                lbl_estado.Text = "ACCESO FALLIDO";
-                lbl_estado.ForeColor = Color.Red;
-                CentrarControl(lbl_estado, this);
+                fallaRegistro();
                 return;
+            }
+            else {
+                string nombre = databaseService.ObtenerNombrePorDNI(txt_Codigo.Text);
+                if (nombre == "")
+                {
+                    txt_Nombre.Text = "DNI O CARNÉ NO IDENTIFICADO";
+                    txt_Codigo.Text = "";
+                    txt_Codigo.Focus();
+                    fallaRegistro();
+                }
+                else {
+                    txt_Codigo.Text = "";
+                    txt_Codigo.Focus();
+                    txt_Nombre.Text = nombre.Replace(",", "\n");
+                    CentrarControl(txt_Nombre, this);
+                    lbl_estado.Text = "ACCESO CORRECTO";
+                    lbl_estado.ForeColor = Color.Green;
+                    CentrarControl(lbl_estado, this);
+                    return;
+
+                }
             }
 
             // Aquí va tu lógica para procesar el código
             //ProcesarCodigo(txt_Codigo.Text);
         }
 
+        private void fallaRegistro() {
+            lbl_estado.Text = "ACCESO FALLIDO";
+            lbl_estado.ForeColor = Color.Red;
+            CentrarControl(lbl_estado, this);            
+        }
+
+        private void txt_Codigo_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
