@@ -1,6 +1,7 @@
 using System.Drawing.Text;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using ATTEDEYV.Models;
 using ATTEDEYV.Services;
 
 namespace ATTEDEYV
@@ -31,15 +32,12 @@ namespace ATTEDEYV
                 this.BackColor = Color.DarkGray;
             }
             CargarFuenteDigital();
+            timer_Reloj.Start();
             CentrarControl(lbl_estado, this);
             CentrarControl(lbl_Reloj, this);
-            CentrarControl(txt_Nombre, this);
+            CentrarControl(txt_Apellidos, this);
             CentrarControl(txt_Codigo, this);
-
-            
-
-
-
+            CentrarControl(txt_Nombres, this);
         }
 
         PrivateFontCollection pfc = new PrivateFontCollection();
@@ -107,20 +105,27 @@ namespace ATTEDEYV
                 fallaRegistro();
                 return;
             }
-            else {
-                string nombre = databaseService.ObtenerNombrePorDNI(txt_Codigo.Text);
-                if (nombre == "")
+            else
+            {
+                Persona persona = databaseService.ObtenerNombrePorDNI(txt_Codigo.Text);
+                if (persona.Nombres == "" && persona.Apellidos == "")
                 {
-                    txt_Nombre.Text = "DNI O CARNÉ NO IDENTIFICADO";
+                    txt_Apellidos.Text = "DNI O CARNÉ";
+                    txt_Nombres.Text = "NO IDENTIFICADO";
                     txt_Codigo.Text = "";
+                    txt_Nombres.Text = "";
+                    txt_Apellidos.Text = "";
                     txt_Codigo.Focus();
                     fallaRegistro();
                 }
-                else {
+                else
+                {
                     txt_Codigo.Text = "";
                     txt_Codigo.Focus();
-                    txt_Nombre.Text = nombre.Replace(",", "\n");
-                    CentrarControl(txt_Nombre, this);
+                    txt_Apellidos.Text = persona.Apellidos;
+                    txt_Nombres.Text = persona.Nombres;
+                    CentrarControl(txt_Apellidos, this);
+                    CentrarControl(txt_Nombres, this);
                     lbl_estado.Text = "ACCESO CORRECTO";
                     lbl_estado.ForeColor = Color.Green;
                     CentrarControl(lbl_estado, this);
@@ -133,15 +138,26 @@ namespace ATTEDEYV
             //ProcesarCodigo(txt_Codigo.Text);
         }
 
-        private void fallaRegistro() {
+        private void fallaRegistro()
+        {
             lbl_estado.Text = "ACCESO FALLIDO";
             lbl_estado.ForeColor = Color.Red;
-            CentrarControl(lbl_estado, this);            
+            CentrarControl(lbl_estado, this);
         }
 
         private void txt_Codigo_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void timer_Reloj_Tick(object sender, EventArgs e)
+        {
+            lbl_Reloj.Text = DateTime.Now.ToString("HH:mm:ss");
         }
     }
 }

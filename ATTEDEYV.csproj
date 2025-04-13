@@ -11,13 +11,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Resources\digital-7.ttf">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </EmbeddedResource>
+    <None Remove="Resources\fondo_main.jpg" />
+    <None Remove="Resources\logo_infodeyv.png" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Models\" />
+    <EmbeddedResource Include="Resources\digital-7.ttf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>
@@ -37,6 +38,11 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Data.SqlClient" Version="6.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\fondo_main.jpg" />
+    <Resource Include="Resources\logo_infodeyv.png" />
   </ItemGroup>
 
 </Project>
